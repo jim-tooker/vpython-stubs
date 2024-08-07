@@ -5,14 +5,12 @@ tools that use '.pyi' files to determine static type checking compliance.
 Note: It is not complete yet. I only implemented the areas I'm using in VPython.
 """
 
-from typing import Union, List, Tuple, ClassVar, Iterable
-from vector import *
+from __future__ import annotations
+from typing import Union, List, Tuple, ClassVar, Iterable, TYPE_CHECKING
+if TYPE_CHECKING:
+    from vector import *
 
 __author__ = "Jim Tooker"
-
-__all__ = ['color', 'canvas', 'sphere', 'label', 'curve', 'graph', 'gcurve',
-           'rate', 'arange',
-          ]
 
 
 class color:
@@ -56,7 +54,7 @@ class canvas:
     ) -> None: ...
 
     @classmethod
-    def get_selected(self) -> 'canvas': ...
+    def get_selected(cls) -> 'canvas': ...
 
     @property
     def title(self) -> str: ...
@@ -278,7 +276,7 @@ class graph:
     ) -> None: ...
 
     @classmethod
-    def get_selected(self) -> 'graph': ...
+    def get_selected(cls) -> 'graph': ...
 
     @property
     def interval(self) -> int: ...
