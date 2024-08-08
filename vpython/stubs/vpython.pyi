@@ -5,10 +5,8 @@ tools that use '.pyi' files to determine static type checking compliance.
 Note: It is not complete yet. I only implemented the areas I'm using in VPython.
 """
 
-from __future__ import annotations
-from typing import Union, List, Tuple, ClassVar, Iterable, TYPE_CHECKING
-if TYPE_CHECKING:
-    from vector import *
+from typing import Union, List, Tuple, ClassVar, Iterable
+from vector import *
 
 __author__ = "Jim Tooker"
 
