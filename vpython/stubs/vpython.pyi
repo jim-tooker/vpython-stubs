@@ -182,7 +182,6 @@ class sphere:
     """ From vpython.py """
     pos: vector
     visible: bool
-    radius: float
     make_trail: bool
 
     def __init__(
@@ -196,9 +195,64 @@ class sphere:
         shininess: vector = ...,
         emissive: bool = ...,
         visible: bool = ...,
+        canvas: object = ...,
         make_trail: bool = ...,
         up: vector = ...,
+        group: object = ...,
     ) -> None: ...
+
+    @property
+    def radius(self) -> float: ...
+    @radius.setter
+    def radius(self, value: float) -> None: ...
+
+    @property
+    def size(self) -> vector: ...
+    @size.setter
+    def size(self, value: vector) -> None: ...
+
+    @property
+    def axis(self) -> vector: ...
+    @axis.setter
+    def axis(self, value: vector) -> None: ...
+
+    def clear_trail(self) -> None: ...
+
+
+class ellipsoid:
+    """ From vpython.py """
+    pos: vector
+    visible: bool
+    length: float
+    width: float
+    height: float
+    size: vector
+    axis: vector
+    make_trail: bool
+
+    def __init__(
+        self,
+        pos: vector = ...,
+        color: vector = ...,
+        length: float = ...,
+        height: float = ...,
+        width: float = ...,
+        size: vector = ...,
+        axis: vector = ...,
+        opacity: float = ...,
+        shininess: vector = ...,
+        emissive: bool = ...,
+        visible: bool = ...,
+        canvas: object = ...,
+        make_trail: bool = ...,
+        up: vector = ...,
+        group: object = ...,
+    ) -> None: ...
+
+    @property
+    def radius(self) -> float: ...
+    @radius.setter
+    def radius(self, value: float) -> None: ...
 
     def clear_trail(self) -> None: ...
 
