@@ -408,6 +408,13 @@ class graph:
 
 class gcurve:
     """ From vpython.py """
+    color: vector
+    label: str
+    legend: bool
+    width: int
+    visible: bool
+    data: List[Union[Tuple[float, float], List[float]]]
+    
     def __init__(
         self,
         color: vector = ...,
