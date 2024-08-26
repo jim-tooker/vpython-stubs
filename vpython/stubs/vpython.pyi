@@ -98,8 +98,17 @@ class color:
     def rgb_to_grayscale(cls, v: vector) -> vector: ...
 
 
+class Mouse:
+    ...
+
+class Camera:
+    def rotate(self, axis: vector, angle: float, origin: vector) -> None: ...
+
 class canvas:
     """ From vpython.py """
+    title_anchor: object
+    caption_anchor: object
+
     def __init__(
         self,
         title: str = ...,
@@ -115,7 +124,7 @@ class canvas:
     ) -> None: ...
 
     @classmethod
-    def get_selected(cls) -> 'canvas': ...
+    def get_selected(cls) -> canvas: ...
 
     @property
     def title(self) -> str: ...
@@ -126,6 +135,12 @@ class canvas:
     def caption(self) -> str: ...
     @caption.setter
     def caption(self, value: str) -> None: ...
+
+    @property
+    def mouse(self) -> Mouse: ...
+
+    @property
+    def camera(self) -> Camera: ...
 
     @property
     def visible(self) -> bool: ...
@@ -141,6 +156,11 @@ class canvas:
     def background(self) -> vector: ...
     @background.setter
     def background(self, value: vector) -> None: ...
+
+    @property
+    def ambient(self) -> vector: ...
+    @ambient.setter
+    def ambient(self, value: vector) -> None: ...
 
     @property
     def width(self) -> int: ...
@@ -163,9 +183,57 @@ class canvas:
     def center(self, value: vector) -> None: ...
 
     @property
+    def axis(self) -> vector: ...
+    @axis.setter
+    def axis(self, value: vector) -> None: ...
+
+    @property
+    def forward(self) -> vector: ...
+    @forward.setter
+    def forward(self, value: vector) -> None: ...
+
+    @property
     def range(self) -> int: ...
     @range.setter
     def range(self, value: int) -> None: ...
+
+    @property
+    def up(self) -> vector: ...
+    @up.setter
+    def up(self, value: vector) -> None: ...
+
+    @property
+    def autoscale(self) -> bool: ...
+    @autoscale.setter
+    def autoscale(self, value: bool) -> None: ...
+
+    @property
+    def userzoom(self) -> bool: ...
+    @userzoom.setter
+    def userzoom(self, value: bool) -> None: ...
+
+    @property
+    def userspin(self) -> bool: ...
+    @userspin.setter
+    def userspin(self, value: bool) -> None: ...
+
+    @property
+    def userpan(self) -> bool: ...
+    @userpan.setter
+    def userpan(self, value: bool) -> None: ...
+
+    @property
+    def lights(self) -> List[object]: ...
+    @lights.setter
+    def lights(self, value: List[object]) -> None: ...
+
+    @property
+    def fov(self) -> float: ...
+    @fov.setter
+    def fov(self, value: float) -> None: ...
+
+    @property
+    def objects(self) -> List[object]: ...
 
     @property
     def pixel_to_world(self) -> int: ...
@@ -174,8 +242,10 @@ class canvas:
 
     def select(self) -> None: ...
     def delete(self) -> None: ...
+    def follow(self, obj: object) -> None: ...
     def append_to_title(self, title: str) -> None: ...
     def append_to_caption(self, caption: str) -> None: ...
+    def objz(self, obj: object, operation: str) -> None: ...
 
 
 class sphere:
@@ -194,6 +264,7 @@ class sphere:
         opacity: float = ...,
         shininess: vector = ...,
         emissive: bool = ...,
+        texture: object = ...,
         visible: bool = ...,
         canvas: object = ...,
         make_trail: bool = ...,
@@ -217,6 +288,7 @@ class sphere:
     def axis(self, value: vector) -> None: ...
 
     def clear_trail(self) -> None: ...
+    def rotate(self, axis: vector, angle: float, origin: vector) -> None: ...
 
 
 class ellipsoid:
@@ -255,6 +327,7 @@ class ellipsoid:
     def radius(self, value: float) -> None: ...
 
     def clear_trail(self) -> None: ...
+    def rotate(self, axis: vector, angle: float, origin: vector) -> None: ...
 
 
 class label:
@@ -414,7 +487,7 @@ class gcurve:
     width: int
     visible: bool
     data: List[Union[Tuple[float, float], List[float]]]
-    
+
     def __init__(
         self,
         color: vector = ...,
@@ -458,6 +531,121 @@ class gcurve:
 
     def plot(self, x: float, y: float) -> None: ...
     def delete(self) -> None: ...
+
+
+class cylinder:
+    """ From vpython.py """
+    pos: vector
+    visible: bool
+    make_trail: bool
+
+    def __init__(
+        self,
+        pos: vector = ...,
+        axis: vector = ...,
+        color: vector = ...,
+        radius: float = ...,
+        length: float = ...,
+        size: vector = ...,
+        opacity: float = ...,
+        shininess: vector = ...,
+        emissive: bool = ...,
+        texture: object = ...,
+        visible: bool = ...,
+        canvas: object = ...,
+        make_trail: bool = ...,
+        up: vector = ...,
+        group: object = ...,
+    ) -> None: ...
+
+    @property
+    def radius(self) -> float: ...
+    @radius.setter
+    def radius(self, value: float) -> None: ...
+
+    @property
+    def size(self) -> vector: ...
+    @size.setter
+    def size(self, value: vector) -> None: ...
+
+    @property
+    def axis(self) -> vector: ...
+    @axis.setter
+    def axis(self, value: vector) -> None: ...
+
+    def clear_trail(self) -> None: ...
+    def rotate(self, axis: vector, angle: float, origin: vector) -> None: ...
+
+
+class arrow:
+    """ From vpython.py """
+    pos: vector
+    visible: bool
+    make_trail: bool
+
+    def __init__(
+        self,
+        pos: vector = ...,
+        axis: vector = ...,
+        color: vector = ...,
+        round: bool = ...,
+        shaftwidth: float = ...,
+        headwidth: float = ...,
+        headlength: float = ...,
+        opacity: float = ...,
+        shininess: vector = ...,
+        emissive: bool = ...,
+        texture: object = ...,
+        visible: bool = ...,
+        canvas: object = ...,
+        make_trail: bool = ...,
+        up: vector = ...,
+        group: object = ...,
+    ) -> None: ...
+
+    @property
+    def round(self) -> bool: ...
+
+    @property
+    def shaftwidth(self) -> float: ...
+    @shaftwidth.setter
+    def shaftwidth(self, value: float) -> None: ...
+
+    @property
+    def headwidth(self) -> float: ...
+    @headwidth.setter
+    def headwidth(self, value: float) -> None: ...
+
+    @property
+    def headlength(self) -> float: ...
+    @headlength.setter
+    def headlength(self, value: float) -> None: ...
+
+    @property
+    def scale(self) -> float: ...
+    @scale.setter
+    def scale(self, value: float) -> None: ...
+
+    def stop(self) -> None: ...
+    def start(self) -> None: ...
+    def clear_trail(self) -> None: ...
+    def rotate(self, axis: vector, angle: float, origin: vector) -> None: ...
+
+
+class textures:
+    """ From vpython.py """
+    flower: str
+    granite: str
+    gravel: str
+    earth: str
+    metal: str
+    rock: str
+    rough: str
+    rug: str
+    stones: str
+    stucco: str
+    wood: str
+    wood_old: str
 
 
 """ vector.py module methods """
