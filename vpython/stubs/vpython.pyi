@@ -649,6 +649,38 @@ class textures:
     wood_old: str
 
 
+class button:
+    """ From vpython.py """
+    disabled: bool
+
+    def __init__(
+        self,
+        bind: object = ...,
+        text: str = ...,
+        pos: object = ...,
+        color: vector = ...,
+        background: vector = ...,
+        disabled: bool = ...,
+    ) -> None: ...
+
+    @property
+    def text(self) -> str: ...
+    @text.setter
+    def text(self, value: str) -> None: ...
+
+    @property
+    def color(self) -> vector: ...
+    @color.setter
+    def color(self, value: vector) -> None: ...
+
+    @property
+    def background(self) -> vector: ...
+    @background.setter
+    def background(self, value: vector) -> None: ...
+
+    def delete(self) -> None: ...
+
+
 """ vector.py module methods """
 def mag(A: vector) -> float: ...
 def mag2(A: vector) -> float: ...
