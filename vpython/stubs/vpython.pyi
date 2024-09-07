@@ -262,11 +262,11 @@ class sphere:
         size: vector = ...,
         axis: vector = ...,
         opacity: float = ...,
-        shininess: vector = ...,
+        shininess: float = ...,
         emissive: bool = ...,
         texture: object = ...,
         visible: bool = ...,
-        canvas: object = ...,
+        canvas: canvas = ...,
         make_trail: bool = ...,
         up: vector = ...,
         group: object = ...,
@@ -352,10 +352,10 @@ class ellipsoid:
         size: vector = ...,
         axis: vector = ...,
         opacity: float = ...,
-        shininess: vector = ...,
+        shininess: float = ...,
         emissive: bool = ...,
         visible: bool = ...,
-        canvas: object = ...,
+        canvas: canvas = ...,
         make_trail: bool = ...,
         up: vector = ...,
         group: object = ...,
@@ -588,11 +588,11 @@ class cylinder:
         length: float = ...,
         size: vector = ...,
         opacity: float = ...,
-        shininess: vector = ...,
+        shininess: float = ...,
         emissive: bool = ...,
         texture: object = ...,
         visible: bool = ...,
-        canvas: object = ...,
+        canvas: canvas = ...,
         make_trail: bool = ...,
         up: vector = ...,
         group: object = ...,
@@ -634,11 +634,11 @@ class arrow:
         headwidth: float = ...,
         headlength: float = ...,
         opacity: float = ...,
-        shininess: vector = ...,
+        shininess: float = ...,
         emissive: bool = ...,
         texture: object = ...,
         visible: bool = ...,
-        canvas: object = ...,
+        canvas: canvas = ...,
         make_trail: bool = ...,
         up: vector = ...,
         group: object = ...,
@@ -719,6 +719,30 @@ class button:
     def background(self, value: vector) -> None: ...
 
     def delete(self) -> None: ...
+
+
+class local_light:
+    """ From vpython.py """
+    pos: vector
+    color: vector
+
+    def __init__(
+        self,
+        pos: vector = ...,
+        color: vector = ...,
+    ) -> None: ...
+
+
+class distant_light:
+    """ From vpython.py """
+    direction: vector
+    color: vector
+
+    def __init__(
+        self,
+        direction: vector = ...,
+        color: vector = ...,
+    ) -> None: ...
 
 
 """ vector.py module methods """
